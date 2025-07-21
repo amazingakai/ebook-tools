@@ -173,6 +173,8 @@ int _ocf_get_file(struct ocf *ocf, const char *filename, char **fileStr) {
   if ((size = zip_fread(file, *fileStr, fileStat.size)) == -1) {
     _epub_print_debug(epub, DEBUG_INFO, "%s - %s", 
                       filename, zip_strerror(arch));
+    free(*fileStr);
+    *fileStr = NULL;
   } else {
     (*fileStr)[size] = 0;
   }
